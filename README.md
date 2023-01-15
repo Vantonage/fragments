@@ -10,11 +10,17 @@ ESLint helps to find problems in the code. The script runs and then indicates wh
 start
 npm start
 
+Runs our server normally.
+
 dev
 npm run dev
 
+Runs the server via nodemon.
+
 debug
-num run debug
+npm run debug
+
+Runs similar to npm run dev but also starts node inspector so it can debug.
 
 Since I am running Windows and Windows has a curl command built in Powershell, I will encounter an error if I were
 to use the curl command. Instead, I will need to call the executable file curl.exe.
