@@ -29,6 +29,7 @@ app.use(cors());
 // modifications to src/app.js
 const passport = require('passport');
 const authenticate = require('./authorization');
+const { createErrorResponse } = require('./response');
 
 // Use gzip/deflate compression middleware
 app.use(compression());
@@ -83,16 +84,17 @@ app.use((err, req, res, next) => {
   const status = err.status || 500;
   const message = err.message || 'unable to process request';
 
+  const errorResponse = createErrorResponse(status, message);
   // If this is a server error, log something so we can see what's going on.
   if (status > 499) {
     logger.error({ err }, `Error processing request`);
   }
 
   res.status(status).json({
-    status: 'error',
+    status: errorResponse.status,
     error: {
-      message,
-      code: status,
+      message: errorResponse.error.message,
+      code: errorResponse.error.code,
     },
   });
 });
