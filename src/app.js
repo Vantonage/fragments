@@ -28,7 +28,7 @@ app.use(cors());
 
 // modifications to src/app.js
 const passport = require('passport');
-const authenticate = require('./authentication');
+const authenticate = require('./authorization');
 
 // Use gzip/deflate compression middleware
 app.use(compression());

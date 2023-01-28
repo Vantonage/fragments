@@ -10,7 +10,7 @@ const router = express.Router();
 
 // modifications to src/routes/index.js
 // Our authentication middleware
-const { authenticate } = require('../authentication');
+const { authenticate } = require('../authorization');
 
 /**
  * Expose all of our API routes on /v1/* to include an API version.
