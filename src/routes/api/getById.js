@@ -13,7 +13,6 @@ module.exports = async (req, res) => {
   try {
     logger.debug(`Getting fragment for this user ${req.user}`);
     var fragment = new Fragment(await Fragment.byId(req.user, id));
-
     var fragmentData = await fragment.getData();
     res.status(200).setHeader('content-type', fragment.type).send(fragmentData);
   } catch (err) {
