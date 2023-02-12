@@ -169,18 +169,8 @@ class Fragment {
   get formats() {
     if (this.mimeType === 'text/plain') {
       return ['text/plain'];
-    } else if (this.mimeType === 'text/markdown') {
-      throw new Error('Cannot be markdown');
-    } else if (this.mimeType === 'text/html') {
-      throw new Error('Cannot be html');
-    } else if (this.mimeType === 'application/json') {
-      throw new Error('Cannot be json');
-    } else if (this.mimeType === 'image/png') {
-      throw new Error('Cannot be image/png');
-    } else if (this.mimeType === 'image/jpeg') {
-      throw new Error('Cannot be image/jpeg');
     } else {
-      throw new Error('Cannot be image/webp');
+      throw new Error('Cannot be unsupported');
     }
   }
 
