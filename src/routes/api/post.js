@@ -14,7 +14,6 @@ module.exports = async (req, res) => {
 
       res.setHeader('Content-Type', fragment.type);
       res.setHeader('Location', apiURL + '/v1/fragments/' + fragment.id);
-
       res.status(201).json(createSuccessResponse({ fragment }));
     } catch (err) {
       logger.warn(err);
