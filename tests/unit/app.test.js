@@ -9,4 +9,10 @@ describe(' app.use 404 middleware test', () => {
     const res = await request(app).get('/hello');
     expect(res.statusCode).toBe(404);
   });
+
+  test('should return HTTP 500 for an internal server error', () =>
+    request(app).post('/v1/fragments').auth('user1@email.com', 'password1').expect(500));
+
+  test('should return HTTP 401 for unauthorized', () => request(app).post('%').expect(400));
+
 });
