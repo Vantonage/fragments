@@ -1,7 +1,12 @@
 # Docker file for lab 5
 
 # Use node version 18.13.0
-FROM node:16.17.0
+
+
+# Stage 0: Install the base dependecies
+FROM node:16.17.0@sha256:a5d9200d3b8c17f0f3d7717034a9c215015b7aae70cb2a9d5e5dae7ff8aa6ca8 AS dependencies
+
+ENV NODE_ENV=production
 
 # Metadata about my image
 LABEL maintainer="Ricky Chen <rchen100@myseneca.ca>"
@@ -30,6 +35,13 @@ COPY package*.json ./
 # Install node dependencies defined in package-lock.json
 RUN npm install
 
+# Stage 1:
+FROM node:16.17.0@sha256:a5d9200d3b8c17f0f3d7717034a9c215015b7aae70cb2a9d5e5dae7ff8aa6ca8 AS start
+
+WORKDIR /app
+COPY --from=dependencies /app /app
+
+# Copy the source code
 # Copy src to /app/src/
 COPY ./src ./src
 
@@ -39,5 +51,9 @@ COPY ./tests/.htpasswd ./tests/.htpasswd
 # Start the container by running our server
 CMD npm start
 
+
+#Stage 3:
+
+FROM node:16.17.0@sha256:a5d9200d3b8c17f0f3d7717034a9c215015b7aae70cb2a9d5e5dae7ff8aa6ca8 AS deploy
 # We run our service on port 8080
 EXPOSE 8080
