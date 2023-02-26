@@ -33,10 +33,11 @@ COPY package*.json /app/
 COPY package*.json ./
 
 # Install node dependencies defined in package-lock.json
-RUN npm install
+RUN npm ci --only=production
 
 # Stage 1:
-FROM node:16.17.0@sha256:a5d9200d3b8c17f0f3d7717034a9c215015b7aae70cb2a9d5e5dae7ff8aa6ca8 AS start
+
+FROM node:16.17.0@sha256:a5d9200d3b8c17f0f3d7717034a9c215015b7aae70cb2a9d5e5dae7ff8aa6ca8 AS build
 
 WORKDIR /app
 COPY --from=dependencies /app /app
@@ -51,9 +52,5 @@ COPY ./tests/.htpasswd ./tests/.htpasswd
 # Start the container by running our server
 CMD npm start
 
-
-#Stage 3:
-
-FROM node:16.17.0@sha256:a5d9200d3b8c17f0f3d7717034a9c215015b7aae70cb2a9d5e5dae7ff8aa6ca8 AS deploy
 # We run our service on port 8080
 EXPOSE 8080
