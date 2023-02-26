@@ -169,7 +169,17 @@ class Fragment {
   get formats() {
     if (this.mimeType === 'text/plain') {
       return ['text/plain'];
-    } else {
+    } 
+    else if (this.mimeType === 'text/markdown'){
+      return ['text/markdown'];
+    }
+    else if (this.mimeType === 'text/html'){
+      return ['text/html'];
+    }
+    else if (this.mimeType === 'application/json'){
+      return ['application/json'];
+    }
+    else {
       throw new Error('Cannot be unsupported');
     }
   }
@@ -181,6 +191,15 @@ class Fragment {
    */
   static isSupportedType(value) {
     if (value == 'text/plain' || value == 'text/plain; charset=utf-8') {
+      return true;
+    }
+    else if (value == 'text/markdown'){
+      return true;
+    }
+    else if (value == 'text/html'){
+      return true;
+    }
+    else if (value == 'application/json'){
       return true;
     }
     return false;
