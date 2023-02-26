@@ -21,6 +21,31 @@ describe('POST /v1/fragments', () => {
       .set('Content-Type', 'text/plain');
     expect(res.statusCode).toBe(201);
   });
+  //201 created code if user can create a plain text
+  test('Authenticated users can create a markdown text fragment', async () => {
+    const res = await await request(app)
+      .post('/v1/fragments')
+      .auth('user1@email.com', 'password1')
+      .set('Content-Type', 'text/markdown');
+    expect(res.statusCode).toBe(201);
+  });
+
+  //201 created code if user can create a plain text
+  test('Authenticated users can create an html text fragment', async () => {
+    const res = await await request(app)
+      .post('/v1/fragments')
+      .auth('user1@email.com', 'password1')
+      .set('Content-Type', 'text/html');
+    expect(res.statusCode).toBe(201);
+  });
+  //201 created code if user can create a plain text
+  test('Authenticated users can create an application json', async () => {
+    const res = await await request(app)
+      .post('/v1/fragments')
+      .auth('user1@email.com', 'password1')
+      .set('Content-Type', 'application/json');
+    expect(res.statusCode).toBe(201);
+  });
   // 200 status code if the response has a location header
   test('Responses include a location header', async () => {
     const res = await await await request(app)
