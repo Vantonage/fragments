@@ -1,8 +1,4 @@
 # Docker file for lab 5
-
-# Use node version 18.13.0
-
-
 # Stage 0: Install the base dependecies
 FROM node:16.17.0@sha256:a5d9200d3b8c17f0f3d7717034a9c215015b7aae70cb2a9d5e5dae7ff8aa6ca8 AS dependencies
 
@@ -43,14 +39,13 @@ WORKDIR /app
 COPY --from=dependencies /app /app
 
 # Copy the source code
-# Copy src to /app/src/
 COPY ./src ./src
 
 # Copy our HTPASSWD file
 COPY ./tests/.htpasswd ./tests/.htpasswd
 
 # Start the container by running our server
-CMD npm start
+CMD ["npm start"]
 
 # We run our service on port 8080
 EXPOSE 8080
