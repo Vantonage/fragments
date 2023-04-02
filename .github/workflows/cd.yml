@@ -97,7 +97,7 @@ jobs:
             AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
             AWS_SESSION_TOKEN=${{ secrets.AWS_SESSION_TOKEN }}
             PORT=$8080
-            API_URL=$http://{load-balancer-hostname}:8080
+            API_URL=$http://EC2Co-EcsEl-112WQ6GTURXAD-1206608692.us-east-1.elb.amazonaws.com:8080
             AWS_COGNITO_POOL_ID=$us-east-1_2K4fzI8kY
             AWS_COGNITO_CLIENT_ID=$1hh8of9p7pul2qf8n4hf9vcvjb
             AWS_S3_BUCKET_NAME=$ricky.chen-fragments
