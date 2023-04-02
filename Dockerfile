@@ -33,7 +33,7 @@ RUN npm ci --only=production
 
 # Stage 1:
 
-FROM node:1.22-0-alpine@sha256:addd3bf05ec3c69ef3e8f0021ce1ca98e0eb21117b97ab8b64127e3ff6e444ec AS build
+FROM node:16.17.0@sha256:a5d9200d3b8c17f0f3d7717034a9c215015b7aae70cb2a9d5e5dae7ff8aa6ca8 AS build
 
 WORKDIR /app
 COPY --from=dependencies /app /app
