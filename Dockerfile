@@ -29,12 +29,11 @@ COPY package*.json /app/
 COPY package*.json ./
 
 # Install node dependencies defined in package-lock.json
-RUN npm install
-
+RUN npm ci --only=production
 
 # Stage 1:
 
-FROM nginx:1.22-0-alpine@sha256:addd3bf05ec3c69ef3e8f0021ce1ca98e0eb21117b97ab8b64127e3ff6e444ec AS build
+FROM node:1.22-0-alpine@sha256:addd3bf05ec3c69ef3e8f0021ce1ca98e0eb21117b97ab8b64127e3ff6e444ec AS build
 
 WORKDIR /app
 COPY --from=dependencies /app /app
