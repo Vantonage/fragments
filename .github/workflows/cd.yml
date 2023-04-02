@@ -96,6 +96,7 @@ jobs:
             AWS_COGNITO_POOL_ID=$us-east-1_2K4fzI8kY
             AWS_COGNITO_CLIENT_ID=$1hh8of9p7pul2qf8n4hf9vcvjb
             AWS_S3_BUCKET_NAME=$ricky.chen-fragments
+            AWS_REGION=$us-east-1
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
