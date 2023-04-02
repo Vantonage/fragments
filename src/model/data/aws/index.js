@@ -7,7 +7,7 @@ const metadata = new MemoryDB();
 const s3Client = require('./s3Client');
 const { PutObjectCommand, GetObjectCommand } = require('@aws-sdk/client-s3');
 
-const logger = require('../../logger');
+const logger = require('../../../logger');
 
 // Write a fragment's metadata to memory db. Returns a Promise
 function writeFragment(fragment) {
