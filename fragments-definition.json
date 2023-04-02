@@ -28,7 +28,7 @@
         "environment": [
           {
             "name": "API_URL",
-            "value": "http://{load-balancer-hostname}:8080"
+            "value": "http://ec2co-ecsel-112wq6gturxad-1206608692.us-east-1.elb.amazonaws.com:8080"
           },
           {
             "name": "AWS_COGNITO_CLIENT_ID",
