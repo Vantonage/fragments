@@ -93,7 +93,7 @@ jobs:
           environment-variables: |
             LOG_LEVEL=info
             NODE_ENV=production
-            PORT=$8080
+            PORT=8080
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
