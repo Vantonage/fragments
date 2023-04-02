@@ -5,7 +5,7 @@
  * https://www.npmjs.com/package/@aws-sdk/client-s3
  */
 const { S3Client } = require('@aws-sdk/client-s3');
-const logger = require('../../../logger');
+const logger = require('../../../../logger');
 
 /**
  * If AWS credentials are configured in the environment, use them. Normally when we connect to S3
