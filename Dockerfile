@@ -29,6 +29,9 @@ COPY package*.json /app/
 COPY package*.json ./
 
 # Install node dependencies defined in package-lock.json
+RUN npm install
+
+# Install node dependencies defined in package-lock.json
 RUN npm ci --only=production
 
 # Stage 1:
