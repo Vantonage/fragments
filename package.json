@@ -1,7 +1,7 @@
 {
   "name": "fragments",
   "private": true,
-  "version": "0.7.22",
+  "version": "0.7.23",
   "description": "CCP555 fragments back-end API",
   "scripts": {
     "test:watch": "jest -c jest.config.js --runInBand --watch --",
