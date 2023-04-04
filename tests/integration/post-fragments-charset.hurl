@@ -1,11 +1,8 @@
 # tests/integration/post-fragments.hurl
 # Authenticated POST to /v1/fragments
 POST http://localhost:8080/v1/fragments
-# We're sending a plain text fragment
-Content-Type: text/plain; charset=utf-8
-# Include HTTP Basic Auth credentials
-[BasicAuth]
-user1@email.com:password1
+Content-Type: application/json
+Authorization: Basic dXNlcjFAZW1haWwuY29tOnBhc3N3b3JkMQ==
 # Body of the request goes in ```...``` when it's a string
 ```This is a fragment!```
 
@@ -33,8 +30,7 @@ url: header "Location"
 
 # 2. Try to GET the fragment we just posted by its URL
 GET {{url}}
-[BasicAuth]
-user1@email.com:password1
+Authorization: Basic dXNlcjFAZW1haWwuY29tOnBhc3N3b3JkMQ==
 
 HTTP/1.1 200
 Content-Type: text/plain; charset=utf-8
