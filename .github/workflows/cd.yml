@@ -84,6 +84,7 @@ jobs:
           API_URL: http://ec2co-ecsel-112wq6gturxad-1206608692.us-east-1.elb.amazonaws.com:8080
           AWS_COGNITO_POOL_ID: ${{ secrets.AWS_COGNITO_POOL_ID }}
           AWS_COGNITO_CLIENT_ID: ${{ secrets.AWS_COGNITO_CLIENT_ID }}
+          VERSION_TAG: ${{ github.ref_name }}
         with:
           task-definition: fragments-definition.json
           container-name: fragments
