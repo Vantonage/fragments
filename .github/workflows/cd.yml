@@ -81,7 +81,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
           AWS_S3_BUCKET_NAME: ricky.chen-fragments
-          API_URL: http://ec2co-ecsel-112wq6gturxad-1206608692.us-east-1.elb.amazonaws.com:8080
+          API_URL: http://EC2Co-EcsEl-112WQ6GTURXAD-1206608692.us-east-1.elb.amazonaws.com:8080
           AWS_COGNITO_POOL_ID: ${{ secrets.AWS_COGNITO_POOL_ID }}
           AWS_COGNITO_CLIENT_ID: ${{ secrets.AWS_COGNITO_CLIENT_ID }}
           VERSION_TAG: ${{ github.ref_name }}
