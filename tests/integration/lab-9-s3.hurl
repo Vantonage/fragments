@@ -1,9 +1,8 @@
-# tests/integration/post-fragments.hurl
+# tests/integration/lab-9-s3.hurl
 # 1. Authenticated POST to /v1/fragments
-POST http://localhost:8080/v1/fragments
 # We're sending a plain text fragment
 POST http://localhost:8080/v1/fragments
-Content-Type: text/plain; charset=utf-8
+Content-Type: application/json
 Authorization: Basic dXNlcjFAZW1haWwuY29tOnBhc3N3b3JkMQ==
 # Body of the request goes in ```...``` when it's a string
 ```Hello S3!```
