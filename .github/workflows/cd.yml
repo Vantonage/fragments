@@ -100,6 +100,7 @@ jobs:
             PORT=8080
             AWS_COGNITO_POOL_ID=${{ env.AWS_COGNITO_POOL_ID }}
             AWS_COGNITO_CLIENT_ID=${{ env.AWS_COGNITO_CLIENT_ID }}
+            AWS_DYNAMODB_TABLE_NAME=${{ env.AWS_DYNAMODB_TABLE_NAME }}
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
