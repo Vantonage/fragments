@@ -1,12 +1,12 @@
 // XXX: temporary use of memory-db until we add DynamoDB
-const MemoryDB = require('../memory/memory-db');
+//const MemoryDB = require('../memory/memory-db');
 
 // Create two in-memory databases: one for fragment metadata and the other for raw data
-const metadata = new MemoryDB();
+//const metadata = new MemoryDB();
 
 const s3Client = require('./s3Client');
 const ddbDocClient = require('./ddbDocClient');
-const { PutCommand, GetCommand, QueryCommand } = require('@aws-sdk/lib-dynamodb');
+const { PutCommand, GetCommand, QueryCommand, DeleteCommand } = require('@aws-sdk/lib-dynamodb');
 
 const logger = require("../../../logger")
 
@@ -66,7 +66,7 @@ async function writeFragmentData(ownerId, id, data) {
   };
 
   // Create a PUT Object command to send to S3
-  const command = new PutObjectCommand(params);
+  const command = new PutCommand(params);
 
   try {
     // Use our client to send the command
@@ -111,7 +111,7 @@ async function readFragmentData(ownerId, id) {
   };
 
   // Create a GET Object command to send to S3
-  const command = new GetObjectCommand(params);
+  const command = new GetCommand(params);
 
   try {
     // Get the object from the Amazon S3 bucket. It is returned as a ReadableStream.
@@ -218,8 +218,8 @@ async function deleteFragment(ownerId, id) {
 
 
     // Create a GET Object command to send to DB and S3
-    const commandDB = new DeleteObjectCommand(paramsDB);
-    const commandS3 = new DeleteObjectCommand(paramsS3);
+    const commandDB = new DeleteCommand(paramsDB);
+    const commandS3 = new DeleteCommand(paramsS3);
 
     try {
       // Use our client to send the command
