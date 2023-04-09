@@ -2,7 +2,7 @@
 # 1. Authenticated POST to /v1/fragments
 # We're sending a plain text fragment
 POST http://localhost:8080/v1/fragments
-Content-Type: application/json
+Content-Type: text/plain
 Authorization: Basic dXNlcjFAZW1haWwuY29tOnBhc3N3b3JkMQ==
 # Body of the request goes in ```...``` when it's a string
 ```Hello S3!```
