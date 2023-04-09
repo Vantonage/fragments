@@ -84,6 +84,7 @@ jobs:
           API_URL: http://EC2Co-EcsEl-112WQ6GTURXAD-1206608692.us-east-1.elb.amazonaws.com:8080
           AWS_COGNITO_POOL_ID: ${{ secrets.AWS_COGNITO_POOL_ID }}
           AWS_COGNITO_CLIENT_ID: ${{ secrets.AWS_COGNITO_CLIENT_ID }}
+          AWS_DYNAMODB_TABLE_NAME: ${{ secrets.AWS_DYNAMODB_TABLE_NAME }}
           VERSION_TAG: ${{ github.ref_name }}
         with:
           task-definition: fragments-definition.json
