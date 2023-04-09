@@ -31,7 +31,7 @@ function writeFragment(fragment) {
 }
 
 // Read a fragment's metadata from DynamoDB. Returns a promise.
-function readFragment(ownerId, id) {
+async function readFragment(ownerId, id) {
   //return metadata.get(ownerId, id);
     // Configure our GET params, with the name of the table and key (partition key + sort key)
     const params = {
