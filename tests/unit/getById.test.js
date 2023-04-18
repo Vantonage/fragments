@@ -33,7 +33,6 @@ describe('getById /v1/fragments/:_id', () => {
     .post('/v1/fragments')
     .auth('user1@email.com', 'password1')
     .set('Content-Type', 'text/plain')
-    .send(data);
     var id = JSON.parse(res.text).fragment.id;
     const getRes = await request(app)
       .get(`/v1/fragments/${id}.html`)
