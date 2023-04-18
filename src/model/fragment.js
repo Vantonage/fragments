@@ -6,6 +6,11 @@ const contentType = require('content-type');
 
 const logger = require('../logger');
 
+// convert to markdown
+const md = require('markdown-it')();
+// convert images
+const sharp = require('sharp');
+
 // Functions for working with fragment metadata/data using our DB
 const {
   readFragment,
@@ -179,8 +184,20 @@ class Fragment {
     else if (this.mimeType === 'application/json'){
       return ['application/json'];
     }
+    else if (this.mimeType === 'image/png'){
+      return ['image/png'];
+    }
+    else if (this.mimeType === 'image/jpeg'){
+      return ['image/jpeg'];
+    }
+    else if (this.mimeType === 'image/gif'){
+      return ['image/gif'];
+    }
+    else if (this.mimeType === 'image/webp'){
+      return ['image/webp'];
+    }
     else {
-      throw new Error('Cannot be unsupported');
+      throw new Error('Cannot be supported');
     }
   }
 
@@ -202,7 +219,73 @@ class Fragment {
     else if (value == 'application/json'){
       return true;
     }
+    else if (value == 'image/png'){
+      return true;
+    }
+    else if (value == 'image/jpeg'){
+      return true;
+    }
+    else if (value == 'image/webp'){
+      return true;
+    }
+    else if (value == 'image/gif'){
+      return true;
+    }
     return false;
+  }
+
+  validConversion(ext){
+    var value = false;
+    if (this.type == 'text/plain'){
+      if (ext == '.txt'){
+        value = true;
+      }
+    }
+    else if(this.type == 'text/markdown'){
+      if (ext == '.md' || ext == '.html' || ext == '.txt'){
+        value = true;
+      }
+    }
+    else if (this.type == 'text/html'){
+      if (ext == '.html' || ext == '.txt'){
+        value = true;
+      }
+    }
+    else if (this.type == 'application/json'){
+      if (ext == '.json' || ext == '.txt'){
+        value = true;
+      }
+    }
+    else if (this.type == 'image/png' || this.type == 'image/png' || this.type == 'image/webp' || this.type == 'image/gif'){
+      if (ext == '.png' || ext == '.jpg' || ext == '.webp' || ext == '.gif'){
+        value = true;
+      }
+    }
+    return value;
+  }
+
+  convertFragmentData(data, ext){
+    if (ext == '.txt'){
+      return data.toString();
+    }
+    else if (this.mimeType == "text/markdown" && ext == '.html'){
+      return md.render(data.toString());
+    }
+    else if (ext == '.png'){
+      return sharp(data).toFormat('png');
+    }
+    else if (ext == '.jpeg'){
+      return sharp(data).toFormat('jpeg');
+    }
+    else if (ext == '.gif'){
+      return sharp(data).toFormat('gif');
+    }
+    else if (ext == '.webp'){
+      return sharp(data).toFormat('webp');
+    }
+    else{
+      return data;
+    }
   }
 }
 
