@@ -40,6 +40,9 @@ router.get('/fragments/:id/info', require('./getByInfo'));
 // You can use Buffer.isBuffer(req.body) to test if it was parsed by the raw body parser.
 router.post('/fragments', rawBody(), require('./post'));
 
-router.delete('/fragments/:_id', require('./delete'));
+router.delete('/fragments/:id', require('./delete'));
+
+// put
+router.put('/fragments/:id', rawBody(), require('./put'));
 
 module.exports = router;
