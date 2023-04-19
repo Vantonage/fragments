@@ -27,17 +27,29 @@ describe('getById /v1/fragments/:_id', () => {
     expect(res.statusCode).toBe(404);
   }); 
 
-  // Using a valid username/password pair with correct extension
-  test('authenticated users get a fragments array', async () => {
-    const res = await request(app)
-    .post('/v1/fragments')
-    .auth('user1@email.com', 'password1')
-    .set('Content-Type', 'text/plain')
-    var id = JSON.parse(res.text).fragment.id;
-    const getRes = await request(app)
-      .get(`/v1/fragments/${id}.html`)
+
+  test('convert markdown to html', async () => {
+    const req = await request(app)
+      .post('/v1/fragments/')
       .auth('user1@email.com', 'password1')
-    expect(getRes.statusCode).toBe(200);
-    //expect(getRes.text).toBe(data.toString());
+      .set('Content-type', 'text/markdown');
+    var id = JSON.parse(req.text).fragment.id;
+    const res = await request(app)
+      .get(`/v1/fragments/${id}`)
+      .auth('user1@email.com', 'password1');
+      expect(res.statusCode).toBe(200);
   });
+
+  test('convert markdown to html', async () => {
+    const req = await request(app)
+      .post('/v1/fragments/')
+      .auth('user1@email.com', 'password1')
+      .set('Content-type', 'text/markdown');
+    var id = JSON.parse(req.text).fragment.id;
+    const res = await request(app)
+      .get(`/v1/fragments/${id}`+ '.html')
+      .auth('user1@email.com', 'password1');
+      expect(res.statusCode).toBe(200);
+  });
+
 });
