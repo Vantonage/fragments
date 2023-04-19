@@ -121,6 +121,13 @@ describe('Fragment class', () => {
     test('common text types are supported, with and without charset', () => {
       expect(Fragment.isSupportedType('text/plain')).toBe(true);
       expect(Fragment.isSupportedType('text/plain; charset=utf-8')).toBe(true);
+      expect(Fragment.isSupportedType('text/markdown')).toBe(true);
+      expect(Fragment.isSupportedType('text/html')).toBe(true);
+      expect(Fragment.isSupportedType('application/json')).toBe(true);
+      expect(Fragment.isSupportedType('image/png')).toBe(true);
+      expect(Fragment.isSupportedType('image/jpeg')).toBe(true);
+      expect(Fragment.isSupportedType('image/gif')).toBe(true);
+      expect(Fragment.isSupportedType('image/webp')).toBe(true);
     });
 
     test('other types are not supported', () => {
@@ -159,6 +166,76 @@ describe('Fragment class', () => {
     });
   });
 
+
+  describe('valid conversions', () => {
+    test('valid conversion returns true for .txt', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'text/plain',
+        size: 0,
+      });
+      expect(fragment.validConversion('.txt')).toBe(true);
+    });
+    test('valid conversion returns true for .txt', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'text/html',
+        size: 0,
+      });
+      expect(fragment.validConversion('.txt')).toBe(true);
+    });
+    test('valid conversion returns true for .txt', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'text/markdown',
+        size: 0,
+      });
+      expect(fragment.validConversion('.html')).toBe(true);
+    });
+
+    test('valid conversion returns true for .txt', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'application/json',
+        size: 0,
+      });
+      expect(fragment.validConversion('.txt')).toBe(true);
+    });
+
+    test('valid conversion returns true for images', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'image/png',
+        size: 0,
+      });
+      expect(fragment.validConversion('.jpg')).toBe(true);
+    });
+    test('valid conversion returns true for images', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'image/jpeg',
+        size: 0,
+      });
+      expect(fragment.validConversion('.png')).toBe(true);
+    });
+    test('valid conversion returns true for images', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'image/webp',
+        size: 0,
+      });
+      expect(fragment.validConversion('.jpg')).toBe(true);
+    });
+    test('valid conversion returns true for images', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'image/gif',
+        size: 0,
+      });
+      expect(fragment.validConversion('.jpg')).toBe(true);
+    });
+  });
+
   describe('formats', () => {
     test('formats returns the expected result for plain text', () => {
       const fragment = new Fragment({
@@ -167,6 +244,61 @@ describe('Fragment class', () => {
         size: 0,
       });
       expect(fragment.formats).toEqual(['text/plain']);
+    });
+
+    test('formats returns the expected result for text/markdown', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'text/markdown',
+        size: 0,
+      });
+      expect(fragment.formats).toEqual(['text/markdown']);
+    });
+
+
+    test('formats returns the expected result for text/html', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'text/html',
+        size: 0,
+      });
+      expect(fragment.formats).toEqual(['text/html']);
+    });
+
+
+    test('formats returns the expected result for application/json', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'application/json',
+        size: 0,
+      });
+      expect(fragment.formats).toEqual(['application/json']);
+    });
+
+    test('formats returns the expected result for image/png', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'image/png',
+        size: 0,
+      });
+      expect(fragment.formats).toEqual(['image/png']);
+    });
+    test('formats returns the expected result for image/jpeg', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'image/jpeg',
+        size: 0,
+      });
+      expect(fragment.formats).toEqual(['image/jpeg']);
+    });
+
+    test('formats returns the expected result for image/webp', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'image/webp',
+        size: 0,
+      });
+      expect(fragment.formats).toEqual(['image/webp']);
     });
   });
 
@@ -252,6 +384,74 @@ describe('Fragment class', () => {
 
       await Fragment.delete('1234', fragment.id);
       expect(() => Fragment.byId('1234', fragment.id)).rejects.toThrow();
+    });
+  });
+
+
+  describe('convertContentType()', () => {
+    test('converting .txt to text', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'text/plain',
+        size: 0,
+      });
+      expect(fragment.convertContentType('.txt')).toBe('text/plain');
+    })
+    test('converting .md to markdown', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'text/plain',
+        size: 0,
+      });
+      expect(fragment.convertContentType('.md')).toBe('text/markdown');
+    })
+    test('converting .html to html', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'text/markdown',
+        size: 0,
+      });
+      expect(fragment.convertContentType('.html')).toBe('text/html');
+    })
+    test('converting .json to json', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'application/json',
+        size: 0,
+      });
+      expect(fragment.convertContentType('.json')).toBe('application/json');
+    });
+    test('converting .png to image/png', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'image/jpeg',
+        size: 0,
+      });
+      expect(fragment.convertContentType('.png')).toBe('image/png');
+    });
+    test('converting .jpeg to image/jpeg', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'image/png',
+        size: 0,
+      });
+      expect(fragment.convertContentType('.jpg')).toBe('image/jpeg');
+    });
+    test('converting .webp to image/webp', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'image/png',
+        size: 0,
+      });
+      expect(fragment.convertContentType('.webp')).toBe('image/webp');
+    });
+    test('converting .gif to image/gif', () => {
+      const fragment = new Fragment({
+        ownerId: '1234',
+        type: 'image/png',
+        size: 0,
+      });
+      expect(fragment.convertContentType('.gif')).toBe('image/gif');
     });
   });
 });
