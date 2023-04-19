@@ -256,7 +256,7 @@ class Fragment {
         value = true;
       }
     }
-    else if (this.type == 'image/png' || this.type == 'image/png' || this.type == 'image/webp' || this.type == 'image/gif'){
+    else if (this.type == 'image/png' || this.type == 'image/jpeg' || this.type == 'image/webp' || this.type == 'image/gif'){
       if (ext == '.png' || ext == '.jpg' || ext == '.webp' || ext == '.gif'){
         value = true;
       }
