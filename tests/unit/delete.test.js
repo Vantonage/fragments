@@ -27,4 +27,11 @@ describe('Delete /fragments/:id', () => {
     expect(re.statusCode).toBe(200);
   });
 
+  test('authenticated users delete a non existing fragment. returns error', async () => {
+    const re = await request(app)
+        .delete(`/v1/fragments/$123`)
+        .auth('user1@email.com', 'password1')
+    expect(re.statusCode).toBe(404);
+  });
+
 });
