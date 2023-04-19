@@ -264,6 +264,36 @@ class Fragment {
     return value;
   }
 
+  convertContentType(extension) {
+    if (extension == '.txt') {
+      return 'text/plain';
+    } 
+    else if (extension == '.md') {
+      return 'text/markdown';
+    } 
+    else if (extension == '.html') {
+      return 'text/html';
+    } 
+    else if (extension == '.json') {
+      return 'application/json';
+    } 
+    else if (extension == '.png') {
+      return 'image/png';
+    } 
+    else if (extension == '.jpg') {
+      return 'image/jpeg';
+    } 
+    else if (extension == '.webp') {
+      return 'image/webp';
+    } 
+    else if (extension == '.gif') {
+      return 'image/gif';
+    } 
+    else {
+      return this.mimeType;
+    }
+  }
+  
   convertFragmentData(data, ext){
     if (ext == '.txt'){
       return data.toString();
@@ -272,16 +302,16 @@ class Fragment {
       return md.render(data.toString());
     }
     else if (ext == '.png'){
-      return sharp(data).toFormat('png');
+      return sharp(data).toFormat('png').png().toBuffer();
     }
     else if (ext == '.jpeg'){
-      return sharp(data).toFormat('jpeg');
+      return sharp(data).toFormat('jpeg').jpeg({quality: 100, force: true,}).toBuffer();
     }
     else if (ext == '.gif'){
-      return sharp(data).toFormat('gif');
+      return sharp(data).toFormat('gif').gif().toBuffer();
     }
     else if (ext == '.webp'){
-      return sharp(data).toFormat('webp');
+      return sharp(data).toFormat('webp').webp().toBuffer();
     }
     else{
       return data;
